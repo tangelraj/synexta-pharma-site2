@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://synexta-pharma-site-1.onrender.com/api/:path*"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "https://synexta-pharma-site-1.onrender.com/media/:path*"
+    }
+  ]
+}

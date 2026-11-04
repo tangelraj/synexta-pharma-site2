@@ -1,0 +1,1 @@
+"""Synexta Pharma API project."""

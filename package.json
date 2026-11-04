@@ -1,0 +1,23 @@
+{
+  "name": "synexta-pharma-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:api\" \"npm:dev:client\"",
+    "dev:api": "python \"synext_backend\\manage.py\" runserver 127.0.0.1:8000",
+    "dev:client": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "start:api": "python \"synext_backend\\manage.py\" runserver 127.0.0.1:8000"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.5"
+  }
+}
