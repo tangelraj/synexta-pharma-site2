@@ -12,6 +12,21 @@ from .models import ContactInquiry, Product, SiteContent, SiteContentItem
 
 
 class SiteContentApiTests(TestCase):
+    def test_site_content_admin_list_page_renders(self):
+        from django.contrib.auth import get_user_model
+        from django.urls import reverse
+
+        user = get_user_model().objects.create_superuser(
+            username="content-admin",
+            email="admin@example.com",
+            password="Admin-Test-Password-482!",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("admin:inquiries_sitecontent_changelist"))
+
+        self.assertEqual(response.status_code, 200)
+
     def test_returns_editable_site_content(self):
         content = SiteContent.objects.get(pk="default")
         content.about_title = "Updated about heading"
