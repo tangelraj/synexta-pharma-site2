@@ -68,7 +68,12 @@ Keep the sender app password private; do not put it in source control or share i
 Vercel hosts the frontend; Django must run as a separate backend service. This repository includes a Render Blueprint in `render.yaml` and Vercel rewrites in `vercel.json` for the Render service named `synexta-pharma-api`.
 
 1. In Render, choose **New → Blueprint**, connect this GitHub repository, and deploy the `render.yaml` Blueprint. Set `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, and `DEFAULT_FROM_EMAIL` in the Render service environment before expecting enquiry notifications to arrive.
-2. In the Render service Shell, run `python manage.py createsuperuser` from the `synext_backend` directory to create the admin login.
+2. To create the first admin on Render's free plan (which does not include Shell access), add these environment variables to the Render service:
+   - `DJANGO_SUPERUSER_USERNAME`: a new admin username
+   - `DJANGO_SUPERUSER_EMAIL`: the admin email address
+   - `DJANGO_SUPERUSER_PASSWORD`: a strong, unique password
+
+   Save the variables and wait for the service to redeploy. The startup command creates the admin only if that username is not already present; it never resets an existing account's password. Keep the password in Render's environment settings, not in source code or chat. If the username already belongs to a non-admin account, choose another username. The free service's SQLite database is ephemeral, so the admin can be recreated from these variables if the database is lost.
 3. Redeploy the Vercel project after the Render service is available. The rewrites send `/api/` and `/media/` requests to `https://synexta-pharma-site1.onrender.com`; the Django admin is at `https://synexta-pharma-site1.onrender.com/admin/`.
 
 The included Render service collects and serves Django static assets through WhiteNoise. It uses the free plan for testing. Its local SQLite database and uploaded images are ephemeral and can be lost when the service restarts or redeploys; Render's free service may also sleep when idle. Do not use this configuration for production admin content or inquiries without moving to persistent database and file storage. For production, configure durable database/media storage and update the Render and Vercel deployment settings accordingly.

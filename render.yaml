@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt && python synext_backend/manage.py collectstatic --noinput
-    startCommand: python synext_backend/manage.py migrate && gunicorn --chdir synext_backend synexta_api.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: python synext_backend/manage.py migrate && python synext_backend/manage.py bootstrap_admin && gunicorn --chdir synext_backend synexta_api.wsgi:application --bind 0.0.0.0:$PORT
     healthCheckPath: /api/products/
     envVars:
       - key: DJANGO_SECRET_KEY
