@@ -76,7 +76,7 @@ Vercel hosts the frontend; Django must run as a separate backend service. This r
    - `DJANGO_SUPERUSER_PASSWORD`: a strong, unique password
 
    Save the variables and wait for the service to redeploy. The startup command creates the admin only if that username is not already present; it never resets an existing account's password. Keep the password in Render's environment settings, not in source code or chat. If the username already belongs to a non-admin account, choose another username. The free service's SQLite database is ephemeral, so the admin can be recreated from these variables if the database is lost.
-3. Redeploy the Vercel project after the Render service is available. The rewrites send `/api/` and `/media/` requests to `https://synexta-pharma-site1.onrender.com`; the Django admin is at `https://synexta-pharma-site1.onrender.com/admin/`.
+3. Deploy the Vercel project after the Render service is available. The rewrites send `/api/` and `/media/` requests to `https://synexta-pharma-site2-3.onrender.com`; the Django admin is at `https://synexta-pharma-site2-3.onrender.com/admin/`.
 
 The included Render service collects and serves Django static assets through WhiteNoise. It uses the free plan for testing. Its local SQLite database and uploaded images are ephemeral and can be lost when the service restarts or redeploys; Render's free service may also sleep when idle. Do not use this configuration for production admin content or inquiries without moving to persistent database and file storage. For production, configure durable database/media storage and update the Render and Vercel deployment settings accordingly.
 

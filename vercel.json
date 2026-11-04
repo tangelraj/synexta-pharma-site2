@@ -2,19 +2,19 @@
   "rewrites": [
     {
       "source": "/api/:path*/",
-      "destination": "https://synexta-pharma-site1.onrender.com/api/:path*/"
+      "destination": "https://synexta-pharma-site2-3.onrender.com/api/:path*/"
     },
     {
       "source": "/api/:path*",
-      "destination": "https://synexta-pharma-site1.onrender.com/api/:path*"
+      "destination": "https://synexta-pharma-site2-3.onrender.com/api/:path*"
     },
     {
       "source": "/media/:path*/",
-      "destination": "https://synexta-pharma-site1.onrender.com/media/:path*/"
+      "destination": "https://synexta-pharma-site2-3.onrender.com/media/:path*/"
     },
     {
       "source": "/media/:path*",
-      "destination": "https://synexta-pharma-site1.onrender.com/media/:path*"
+      "destination": "https://synexta-pharma-site2-3.onrender.com/media/:path*"
     }
   ]
 }
