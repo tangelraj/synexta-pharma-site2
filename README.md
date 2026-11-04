@@ -16,6 +16,8 @@ npm install
 python -m pip install -r requirements.txt
 ```
 
+For local Django settings, copy `.env.example` to `.env` and fill in only the values you need. The `.env` file is ignored by Git. Render does not receive this local file; set deployed values in the Render service's **Environment** settings instead.
+
 Start the Django API and Vite frontend together:
 
 ```powershell
