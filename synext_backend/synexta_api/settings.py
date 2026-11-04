@@ -12,6 +12,8 @@ ALLOWED_HOSTS = [
 ]
 if "synexta-pharma-site-1.onrender.com" not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append("synexta-pharma-site-1.onrender.com")
+if "synexta-pharma-site1.onrender.com" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append("synexta-pharma-site1.onrender.com")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
