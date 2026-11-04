@@ -53,7 +53,7 @@ Run the backend tests with:
 python ".\synext_backend\manage.py" test inquiries
 ```
 
-Contact enquiry notifications are emailed to `tangelraj@gmail.com`. Configure an SMTP sender account before submitting enquiries. For Gmail, use an app password (not your regular account password) and set these environment variables in the terminal before starting Django:
+Contact enquiry notifications are emailed to `tangelraj@gmail.com`. Configure an SMTP sender account before submitting enquiries. Render Free web services block outbound SMTP ports 25, 465, and 587, so SMTP notifications require a compatible email API over HTTPS or a hosting plan that permits the required SMTP connection. The app limits SMTP connection time to 10 seconds by default (`EMAIL_TIMEOUT` can override this); enquiries are saved even when email delivery times out. For Gmail on a host that permits SMTP, use an app password (not your regular account password) and set these environment variables in the terminal before starting Django:
 
 ```powershell
 $env:EMAIL_HOST_USER = "your-sender@gmail.com"

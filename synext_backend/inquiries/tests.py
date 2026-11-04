@@ -1,6 +1,7 @@
 import json
 import tempfile
 from io import BytesIO
+from unittest.mock import patch
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core import mail
@@ -181,6 +182,33 @@ class ContactApiTests(TestCase):
         self.assertFalse(response.json()["email_sent"])
         self.assertEqual(ContactInquiry.objects.count(), 1)
         self.assertEqual(ContactInquiry.objects.get().company, payload["company"])
+
+    def test_saves_inquiry_and_returns_warning_when_email_connection_times_out(self):
+        payload = {
+            "name": "Avery Example",
+            "email": "avery@example.com",
+            "topic": "Product enquiry",
+            "message": "I would like to learn more about your product portfolio.",
+        }
+
+        with (
+            override_settings(
+                EMAIL_HOST_USER="sender@example.com",
+                EMAIL_HOST_PASSWORD="test-password",
+                DEFAULT_FROM_EMAIL="sender@example.com",
+                INQUIRY_NOTIFICATION_EMAIL="admin@example.com",
+            ),
+            patch("inquiries.views.EmailMessage.send", side_effect=TimeoutError("SMTP timed out")),
+        ):
+            response = self.client.post(
+                "/api/contact/",
+                data=json.dumps(payload),
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 202)
+        self.assertFalse(response.json()["email_sent"])
+        self.assertEqual(ContactInquiry.objects.count(), 1)
 
     def test_rejects_invalid_email(self):
         response = self.client.post(
