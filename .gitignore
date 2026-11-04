@@ -1,5 +1,7 @@
 node_modules/
 dist/
+.vite/
+staticfiles/
 .vercel/
 .venv/
 venv/

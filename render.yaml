@@ -3,7 +3,7 @@ services:
     name: synexta-pharma-api
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python synext_backend/manage.py collectstatic --noinput
     startCommand: python synext_backend/manage.py migrate && gunicorn --chdir synext_backend synexta_api.wsgi:application --bind 0.0.0.0:$PORT
     healthCheckPath: /api/products/
     envVars:
