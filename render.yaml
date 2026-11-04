@@ -12,7 +12,7 @@ services:
       - key: DJANGO_DEBUG
         value: "false"
       - key: DJANGO_ALLOWED_HOSTS
-        value: synexta-pharma-api.onrender.com,synexta-pharma-site-1.onrender.com,synexta-pharma-site1.onrender.com
+        value: synexta-pharma-api.onrender.com,synexta-pharma-site-1.onrender.com,synexta-pharma-site1.onrender.com,synexta-pharma-site1-1.onrender.com
       - key: EMAIL_HOST_USER
         sync: false
       - key: EMAIL_HOST_PASSWORD
